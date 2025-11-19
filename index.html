@@ -11,7 +11,7 @@ body {
     background: #f4f6fa;
 }
 
-/* TOPO */
+/* ---------- TOPO ---------- */
 .header {
     background: white;
     padding: 18px 40px;
@@ -24,7 +24,6 @@ body {
 .header h2 {
     margin:0;
     color:#001059;
-    font-size: 22px;
 }
 
 .header span {
@@ -32,30 +31,29 @@ body {
     font-size:14px;
 }
 
-/* ÁREA PRINCIPAL */
-.container {
+/* ---------- TELA INICIAL ---------- */
+#home {
     text-align:center;
-    padding: 40px;
+    padding:40px;
 }
 
 .logo {
     width:220px;
-    margin-bottom: 10px;
+    margin-bottom:15px;
 }
 
 .subtitulo {
+    margin-top:10px;
     color:#001059;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-size:22px;
+    font-weight:bold;
 }
 
 .text {
     color:#4a4a4a;
-    margin-bottom: 40px;
+    margin-bottom:40px;
 }
 
-/* CARDS */
 .cards {
     display:flex;
     justify-content:center;
@@ -71,6 +69,8 @@ body {
     cursor:pointer;
     transition:0.25s;
     box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    text-decoration:none;
+    color:black;
 }
 
 .card:hover {
@@ -94,23 +94,23 @@ body {
     font-size:13px;
 }
 
-/* FORMULÁRIO */
-#formContainer {
-    margin-top:40px;
-    background:white;
-    max-width:550px;
-    margin-left:auto;
-    margin-right:auto;
-    padding:25px;
-    border-radius:12px;
+/* ---------- FORMULÁRIOS ---------- */
+#formSection {
     display:none;
-    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+    padding:40px;
 }
 
-#formContainer h3 {
-    margin-top:0;
+.form-box {
+    max-width:550px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+#formSection h2 {
     color:#001059;
-    font-size:20px;
 }
 
 label {
@@ -121,193 +121,216 @@ label {
 input, select {
     width:100%;
     padding:10px;
-    border-radius:8px;
     border:1px solid #b3c3e0;
-    background:#f7f9fe;
+    margin-top:5px;
     margin-bottom:15px;
+    border-radius:8px;
+    background:#f7f9fe;
 }
 
-button.form-btn {
+button {
     width:100%;
     padding:12px;
-    border:none;
     background:#001059;
     color:white;
     font-weight:bold;
-    border-radius:10px;
+    border:none;
+    border-radius:8px;
     cursor:pointer;
-    transition:0.2s;
 }
 
-button.form-btn:hover {
+button:hover {
     background:#233c8e;
 }
 
+/* botão voltar */
+.voltar {
+    background:#ccc;
+    color:#001059;
+    margin-bottom:15px;
+}
+.voltar:hover {
+    background:#bbb;
+}
 </style>
 </head>
 
 <body>
 
-<!-- TOPO -->
+<!-- HEADER -->
 <div class="header">
     <h2>Painéis Facilities</h2>
     <span>Usuário: voce@empresa.com</span>
 </div>
 
-<!-- CONTEÚDO -->
-<div class="container">
-
+<!-- TELA INICIAL (CARDS) -->
+<div id="home">
     <img class="logo" src="https://alloha.com.br/wp-content/uploads/2022/10/logo-alloha.png">
 
     <div class="subtitulo">Bem-vindo ao Painel Facilities</div>
     <div class="text">Selecione o módulo que deseja acessar.</div>
 
-    <!-- CARDS -->
     <div class="cards">
-
-        <div class="card" onclick="loadEnergia()">
+        <div class="card" onclick="loadForm('energia')">
             <img src="https://cdn-icons-png.flaticon.com/512/1048/1048947.png">
             <h3>Energia</h3>
-            <p>Lançamento de contas de energia.</p>
+            <p>Lançamento de contas de energia</p>
         </div>
 
-        <div class="card" onclick="loadAgua()">
+        <div class="card" onclick="loadForm('agua')">
             <img src="https://cdn-icons-png.flaticon.com/512/727/727803.png">
             <h3>Água</h3>
-            <p>Consumo e despesas de água.</p>
+            <p>Consumo e despesas da água</p>
         </div>
 
-        <div class="card" onclick="loadAluguel()">
+        <div class="card" onclick="loadForm('aluguel')">
             <img src="https://cdn-icons-png.flaticon.com/512/3102/3102383.png">
             <h3>Aluguel</h3>
-            <p>Pagamentos e locações.</p>
+            <p>Pagamentos de locações</p>
         </div>
 
-        <div class="card" onclick="loadCustos()">
+        <div class="card" onclick="loadForm('custos')">
             <img src="https://cdn-icons-png.flaticon.com/512/2983/2983592.png">
             <h3>Custos Prediais</h3>
-            <p>Despesas estruturais.</p>
+            <p>Despesas estruturais</p>
         </div>
 
-        <div class="card" onclick="loadContratos()">
+        <div class="card" onclick="loadForm('contratos')">
             <img src="https://cdn-icons-png.flaticon.com/512/2965/2965335.png">
             <h3>Contratos</h3>
-            <p>Gestão e vencimentos.</p>
+            <p>Gestão e vencimentos</p>
         </div>
-
     </div>
-
-    <!-- FORMULÁRIOS AQUI -->
-    <div id="formContainer"></div>
-
 </div>
+
+<!-- FORMULÁRIOS -->
+<div id="formSection"></div>
 
 
 <script>
+function loadForm(tipo){
+    document.getElementById("home").style.display = "none";
+    let form = "";
 
-// FORMULÁRIOS
+    if(tipo === "energia"){
+        form = `
+            <div class='form-box'>
+            <button class='voltar' onclick='voltar()'>← Voltar</button>
+            <h2>Formulário - Energia</h2>
 
-function mostrar(formHTML){
-    let box = document.getElementById("formContainer");
-    box.style.display = "block";
-    box.innerHTML = formHTML;
-    window.scrollTo({ top: box.offsetTop, behavior: "smooth" });
+            <label>Código do Medidor</label>
+            <input type="text">
+
+            <label>Fornecedor</label>
+            <input type="text">
+
+            <label>Mês</label>
+            <input type="month">
+
+            <label>Valor (R$)</label>
+            <input type="number" step="0.01">
+
+            <button>Enviar</button>
+            </div>
+        `;
+    }
+
+    if(tipo === "agua"){
+        form = `
+            <div class='form-box'>
+            <button class='voltar' onclick='voltar()'>← Voltar</button>
+            <h2>Formulário - Água</h2>
+
+            <label>Código do Relógio</label>
+            <input type="text">
+
+            <label>Locador</label>
+            <input type="text">
+
+            <label>Mês</label>
+            <input type="month">
+
+            <label>Consumo (m³)</label>
+            <input type="number">
+
+            <button>Enviar</button>
+            </div>
+        `;
+    }
+
+    if(tipo === "aluguel"){
+        form = `
+            <div class='form-box'>
+            <button class='voltar' onclick='voltar()'>← Voltar</button>
+            <h2>Formulário - Aluguel</h2>
+
+            <label>Locador</label>
+            <input type="text">
+
+            <label>Mês</label>
+            <input type="month">
+
+            <label>Valor</label>
+            <input type="number">
+
+            <button>Enviar</button>
+            </div>
+        `;
+    }
+
+    if(tipo === "custos"){
+        form = `
+            <div class='form-box'>
+            <button class='voltar' onclick='voltar()'>← Voltar</button>
+            <h2>Formulário - Custos Prediais</h2>
+
+            <label>Tipo</label>
+            <select>
+                <option>Manutenção</option>
+                <option>Materiais</option>
+                <option>Seguro</option>
+                <option>Outros</option>
+            </select>
+
+            <label>Valor</label>
+            <input type="number">
+
+            <button>Enviar</button>
+            </div>
+        `;
+    }
+
+    if(tipo === "contratos"){
+        form = `
+            <div class='form-box'>
+            <button class='voltar' onclick='voltar()'>← Voltar</button>
+            <h2>Formulário - Contratos</h2>
+
+            <label>Fornecedor</label>
+            <input type="text">
+
+            <label>Início</label>
+            <input type="date">
+
+            <label>Fim</label>
+            <input type="date">
+
+            <label>Valor</label>
+            <input type="number">
+
+            <button>Enviar</button>
+            </div>
+        `;
+    }
+
+    document.getElementById("formSection").innerHTML = form;
+    document.getElementById("formSection").style.display = "block";
 }
 
-function loadEnergia() {
-    mostrar(`
-        <h3>Formulário - Energia</h3>
-        <label>Código do Medidor</label>
-        <input type="text">
-        
-        <label>Fornecedor</label>
-        <input type="text">
-
-        <label>Mês referência</label>
-        <input type="month">
-
-        <label>Valor (R$)</label>
-        <input type="number" step="0.01">
-
-        <button class="form-btn">Enviar</button>
-    `);
+function voltar(){
+    document.getElementById("formSection").style.display = "none";
+    document.getElementById("home").style.display = "block";
 }
-
-function loadAgua() {
-    mostrar(`
-        <h3>Formulário - Água</h3>
-        <label>Código do Relógio</label>
-        <input type="text">
-
-        <label>Locador</label>
-        <input type="text">
-
-        <label>Mês referência</label>
-        <input type="month">
-
-        <label>Consumo (m³)</label>
-        <input type="number" step="0.01">
-
-        <button class="form-btn">Enviar</button>
-    `);
-}
-
-function loadAluguel() {
-    mostrar(`
-        <h3>Formulário - Pagamento de Aluguel</h3>
-        <label>Locador</label>
-        <input type="text">
-
-        <label>Valor (R$)</label>
-        <input type="number" step="0.01">
-
-        <label>Mês referência</label>
-        <input type="month">
-
-        <button class="form-btn">Enviar</button>
-    `);
-}
-
-function loadCustos() {
-    mostrar(`
-        <h3>Formulário - Custos Prediais</h3>
-
-        <label>Tipo da despesa</label>
-        <select>
-            <option>Manutenção</option>
-            <option>Reparo</option>
-            <option>Materiais</option>
-            <option>Seguro</option>
-            <option>Outro</option>
-        </select>
-
-        <label>Valor (R$)</label>
-        <input type="number" step="0.01">
-
-        <button class="form-btn">Enviar</button>
-    `);
-}
-
-function loadContratos() {
-    mostrar(`
-        <h3>Formulário - Gestão de Contratos</h3>
-
-        <label>Fornecedor</label>
-        <input type="text">
-
-        <label>Data início</label>
-        <input type="date">
-
-        <label>Data final</label>
-        <input type="date">
-
-        <label>Valor Mensal (R$)</label>
-        <input type="number" step="0.01">
-
-        <button class="form-btn">Enviar</button>
-    `);
-}
-
 </script>
 
 </body>
