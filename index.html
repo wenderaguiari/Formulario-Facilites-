@@ -2,402 +2,238 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Facilities - Painel de Formulários</title>
+<title>Facilities - Formulários</title>
 
 <style>
-* { box-sizing: border-box; }
-
 body {
-  margin:0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  display:flex;
-  height:100vh;
-  overflow:hidden;
-  background:#eef1f7;
+    margin: 0;
+    background: #eef1f7;
+    font-family: "Segoe UI", Arial;
+    display: flex;
+    height: 100vh;
 }
 
 /* MENU LATERAL */
 .sidebar {
-  width:260px;
-  background:#00124f;
-  color:#fff;
-  padding:25px;
-}
-
-.sidebar img {
-  width:150px;
-  display:block;
-  margin:0 auto 20px auto;
+    width: 260px;
+    background: #00124f;
+    color: white;
+    padding: 25px;
 }
 
 .sidebar h1 {
-  font-size:22px;
-  text-align:center;
-  margin-bottom:20px;
-  letter-spacing:0.5px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.sidebar-count {
-  background:rgba(255,255,255,0.08);
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:30px;
-}
-
-.sidebar-count span {
-  font-weight:bold;
-}
-
-#top5 {
-  margin-top:10px;
-}
-
-#top5 table {
-  width:100%;
-  border-collapse:collapse;
-  font-size:13px;
-}
-
-#top5 th {
-  border-bottom:1px solid rgba(255,255,255,0.4);
-  padding:6px;
-  text-align:left;
-}
-
-#top5 td {
-  padding:6px;
-}
-
-/* PAINEL PRINCIPAL */
+/* CONTEÚDO PRINCIPAL */
 .main {
-  flex:1;
-  display:flex;
-  flex-direction:row;
+    flex: 1;
+    padding: 30px;
 }
 
-/* COLUNA DA ESQUERDA */
-.filtros {
-  width:420px;
-  background:#fff;
-  padding:25px;
-  overflow-y:auto;
-  border-right:2px solid #001059;
+h2 {
+    color: #001059;
 }
 
-.filtros h2 {
-  color:#001059;
-  font-size:22px;
-  margin-bottom:15px;
-  border-bottom:2px solid #dce3f0;
-  padding-bottom:5px;
+/* BOTÕES DE FORMULÁRIO */
+.menu-botoes {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
 }
 
-label {
-  font-size:14px;
-  font-weight:600;
-  color:#001059;
+.menu-botoes button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #001059;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: 0.2s;
 }
 
-select,input {
-  width:100%;
-  padding:10px 12px;
-  border-radius:8px;
-  border:1px solid #b3c3e0;
-  background:#f7f9fe;
-  margin-bottom:15px;
-  outline:none;
-  transition:0.2s;
-}
-
-select:hover, input:hover {
-  border-color:#334a9f;
-}
-
-select:focus, input:focus {
-  border-color:#001059;
-  background:white;
-}
-
-.section-card {
-  background:#f1f4fb;
-  padding:15px;
-  border-radius:10px;
-  margin-top:25px;
-  border:1px solid #dce3f0;
+.menu-botoes button:hover {
+    background: #233c8e;
 }
 
 /* FORMULÁRIOS */
 #formContainer {
-  background:#ffffff;
-  border:1px solid #dce3f0;
-  padding:20px;
-  border-radius:10px;
-  margin-top:15px;
-}
-
-#formContainer h4 {
-  color:#001059;
-  margin-bottom:10px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border:1px solid #dce3f0;
 }
 
 .form-input {
-  margin-bottom:10px;
+    margin-bottom: 12px;
 }
 
-.form-input label {
-  font-size:13px;
-  color:#001059;
-  font-weight:600;
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #001059;
 }
 
-.form-input input,
-.form-input select {
-  width:100%;
-  padding:10px;
-  border:1px solid #b3c3e0;
-  border-radius:8px;
-  margin-top:5px;
-  background:#f7f9fe;
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #b3c3e0;
+    border-radius: 8px;
+    background: #f7f9fe;
 }
 
-.form-btn {
-  width:100%;
-  margin-top:15px;
-  padding:12px;
-  background:#001059;
-  color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  font-weight:bold;
+button.form-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background: #001059;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
 }
-
-.form-btn:hover {
-  background:#233c8e;
-}
-
-/* MAPA (APENAS DECORAÇÃO) */
-.map {
-  flex:1;
-  padding:20px;
-}
-
-.map h3 {
-  margin:0 0 10px 0;
-  padding-left:12px;
-  border-left:5px solid #001059;
-  font-size:20px;
-  color:#001059;
-}
-
-#map {
-  height:calc(100% - 20px);
-  width:100%;
-  border:2px solid #001059;
-  border-radius:12px;
+button.form-btn:hover {
+    background:#233c8e;
 }
 </style>
-</head>
 
+</head>
 <body>
 
 <!-- MENU LATERAL -->
 <div class="sidebar">
-  <h1>Facilities</h1>
-
-  <div class="sidebar-count">
-    <p><span>Área de Gestão</span><br> Painel de Formulários</p>
-  </div>
-
-  <div id="top5">
-    <h3 style="font-size:15px;">Formulários disponíveis</h3>
-    <table>
-      <tr><td>- Energia</td></tr>
-      <tr><td>- Água</td></tr>
-      <tr><td>- Aluguel</td></tr>
-      <tr><td>- Custos Prediais</td></tr>
-      <tr><td>- Gestão de Contratos</td></tr>
-    </table>
-  </div>
+    <h1>Facilities</h1>
+    <p>Selecione o tipo de formulário</p>
 </div>
 
-<!-- PAINEL PRINCIPAL -->
+<!-- CONTEÚDO -->
 <div class="main">
+    <h2>Formulários</h2>
 
-  <!-- COLUNA DE FILTROS -->
-  <div class="filtros">
-    <h2>Selecionar Formulário</h2>
+    <!-- BOTÕES -->
+    <div class="menu-botoes">
+        <button onclick="loadEnergia()">Energia</button>
+        <button onclick="loadAgua()">Água</button>
+        <button onclick="loadAluguel()">Aluguel</button>
+        <button onclick="loadCustos()">Custos Prediais</button>
+        <button onclick="loadContratos()">Contratos</button>
+    </div>
 
-    <label>Escolha o tipo:</label>
-    <select id="formSelector">
-      <option value="">Selecione...</option>
-      <option value="energia">Energia</option>
-      <option value="agua">Água</option>
-      <option value="aluguel">Pagamento de Aluguel</option>
-      <option value="custos">Custos Prediais</option>
-      <option value="contratos">Gestão de Contratos</option>
-    </select>
-
+    <!-- AREA DO FORMULÁRIO -->
     <div id="formContainer"></div>
-  </div>
-
-  <!-- ÁREA DO MAPA -->
-  <div class="map">
-    <h3>Mapa (exemplo visual)</h3>
-    <div id="map"></div>
-  </div>
 </div>
 
 <script>
-const formSelector = document.getElementById("formSelector");
-const formContainer = document.getElementById("formContainer");
-
-formSelector.addEventListener("change", () => {
-    const value = formSelector.value;
-
-    if (value === "") {
-        formContainer.innerHTML = "";
-        return;
-    }
-
-    switch (value) {
-        case "energia": loadFormEnergia(); break;
-        case "agua": loadFormAgua(); break;
-        case "aluguel": loadFormAluguel(); break;
-        case "custos": loadFormCustos(); break;
-        case "contratos": loadFormContratos(); break;
-    }
-});
-
-// FORMULÁRIOS
-
-function loadFormEnergia() {
-    formContainer.innerHTML = `
-        <h4>Formulário - Energia</h4>
-
+function loadEnergia() {
+    document.getElementById("formContainer").innerHTML = `
+        <h3>Formulário - Energia</h3>
         <div class="form-input">
             <label>Código do Medidor</label>
             <input type="text">
         </div>
-
         <div class="form-input">
             <label>Fornecedor</label>
             <input type="text">
         </div>
-
         <div class="form-input">
-            <label>Mês de Referência</label>
+            <label>Mês referência</label>
             <input type="month">
         </div>
-
         <div class="form-input">
             <label>Valor (R$)</label>
             <input type="number" step="0.01">
         </div>
-
         <button class="form-btn">Enviar</button>
     `;
 }
 
-function loadFormAgua() {
-    formContainer.innerHTML = `
-        <h4>Formulário - Água</h4>
-
+function loadAgua() {
+    document.getElementById("formContainer").innerHTML = `
+        <h3>Formulário - Água</h3>
         <div class="form-input">
             <label>Código do Relógio</label>
             <input type="text">
         </div>
-
         <div class="form-input">
             <label>Locador</label>
             <input type="text">
         </div>
-
         <div class="form-input">
-            <label>Mês de Referência</label>
+            <label>Mês referência</label>
             <input type="month">
         </div>
-
         <div class="form-input">
             <label>Consumo (m³)</label>
             <input type="number" step="0.01">
         </div>
-
         <button class="form-btn">Enviar</button>
     `;
 }
 
-function loadFormAluguel() {
-    formContainer.innerHTML = `
-        <h4>Formulário - Pagamento de Aluguel</h4>
-
+function loadAluguel() {
+    document.getElementById("formContainer").innerHTML = `
+        <h3>Formulário - Pagamento de Aluguel</h3>
         <div class="form-input">
             <label>Locador</label>
             <input type="text">
         </div>
-
         <div class="form-input">
             <label>Valor (R$)</label>
             <input type="number" step="0.01">
         </div>
-
         <div class="form-input">
-            <label>Mês Referência</label>
+            <label>Mês referência</label>
             <input type="month">
         </div>
-
         <button class="form-btn">Enviar</button>
     `;
 }
 
-function loadFormCustos() {
-    formContainer.innerHTML = `
-        <h4>Formulário - Custos Prediais</h4>
-
+function loadCustos() {
+    document.getElementById("formContainer").innerHTML = `
+        <h3>Formulário - Custos Prediais</h3>
         <div class="form-input">
-            <label>Tipo de Despesa</label>
+            <label>Tipo da despesa</label>
             <select>
                 <option>Manutenção</option>
                 <option>Reparo</option>
                 <option>Materiais</option>
                 <option>Seguro</option>
-                <option>Outros</option>
+                <option>Outro</option>
             </select>
         </div>
-
         <div class="form-input">
             <label>Valor (R$)</label>
             <input type="number" step="0.01">
         </div>
-
         <button class="form-btn">Enviar</button>
     `;
 }
 
-function loadFormContratos() {
-    formContainer.innerHTML = `
-        <h4>Formulário - Gestão de Contratos</h4>
-
+function loadContratos() {
+    document.getElementById("formContainer").innerHTML = `
+        <h3>Formulário - Gestão de Contratos</h3>
         <div class="form-input">
             <label>Fornecedor</label>
             <input type="text">
         </div>
-
         <div class="form-input">
-            <label>Data de Início</label>
+            <label>Data início</label>
             <input type="date">
         </div>
-
         <div class="form-input">
-            <label>Data Final</label>
+            <label>Data final</label>
             <input type="date">
         </div>
-
         <div class="form-input">
             <label>Valor Mensal (R$)</label>
             <input type="number" step="0.01">
         </div>
-
         <button class="form-btn">Enviar</button>
     `;
 }
